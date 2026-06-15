@@ -1,0 +1,27 @@
+###  check
+GET http://127.0.0.1:3000/health
+
+### Create product
+POST http://127.0.0.1:3000/api/products
+Content-Type: application/json
+
+{
+  "product_id": 1,
+  "name": "Ca phe Robusta",
+  "manufacturer": "ABC Coffee",
+  "description": "San pham ca phe nguyen chat"
+}
+
+### List products
+GET http://127.0.0.1:3000/api/products
+
+### Get product by id
+GET http://127.0.0.1:3000/api/products/1
+
+### Verify product
+POST http://127.0.0.1:3000/api/verify
+Content-Type: application/json
+
+{
+  "product_id": 1
+}
