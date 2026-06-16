@@ -145,34 +145,61 @@ Backend dùng `ethers-rs` để gọi 3 hàm:
 
 ## 💻 Giao diện Frontend & Hệ thống Quét QR (ReactJS / Vite)
 
-Phần này bao gồm Web Dashboard dành cho doanh nghiệp và Hệ thống Web Scanner dành cho người dùng cuối để truy xuất nguồn gốc.
+Phần này bao gồm **Web Dashboard** dành cho doanh nghiệp và **Hệ thống Web Scanner** dành cho người dùng cuối nhằm thực hiện truy xuất nguồn gốc sản phẩm.
 
-### Cài đặt và Khởi chạy
-Mở một Terminal mới và chạy các lệnh sau:
+### Cài đặt và khởi chạy
+
+Mở một Terminal mới và thực hiện các lệnh sau:
 
 ```bash
 # Di chuyển vào thư mục frontend
 cd frontend
 
-# Cài đặt thư viện (bao gồm html5-qrcode, qrcode.react, react-router-dom, axios)
+# Cài đặt các thư viện cần thiết
+# (bao gồm html5-qrcode, qrcode.react, react-router-dom, axios,...)
 npm install
 
-# Khởi động server giao diện
+# Khởi động ứng dụng frontend
 npm run dev
-
-Truy cập trình duyệt tại: http://localhost:5173
-
 ```
-🔍 Hướng dẫn luồng Truy xuất nguồn gốc (QR Code Scanner)
-1. Sinh tem QR (Phía Doanh nghiệp): - Sau khi tạo sản phẩm thành công trên Dashboard, hệ thống tự động sinh ra một mã QR chứa đường dẫn định danh của sản phẩm (VD: /verify/1).
-  - Doanh nghiệp có thể lưu mã QR này để dán lên bao bì sản phẩm.
 
-2. Sử dụng Camera quét mã (Phía Người dùng):
-  - Truy cập vào đường dẫn http://localhost:5173/scanner.
-  - Trình duyệt sẽ yêu cầu quyền sử dụng Camera.
-  - Đưa tem QR sản phẩm vào khung hình để hệ thống tự động nhận diện.
+Sau khi khởi động thành công, truy cập:
 
-3. Kiểm tra và Đối chiếu Blockchain:
-  - Ngay khi đọc được mã, hệ thống chuyển hướng sang trang Xác thực (/verify/:id).
-  - Frontend sẽ gọi API xuống Rust Backend để đối chiếu 3 lớp dữ liệu: Database Hash, Recomputed Hash, và Blockchain Hash.
-  - Kết quả trả về: Hiển thị mác ✅ SẢN PHẨM CHÍNH HÃNG (Nếu toàn vẹn) hoặc ❌ CẢNH BÁO GIAN LẬN (Nếu dữ liệu Database đã bị can thiệp trái phép).
+```text
+http://localhost:5173
+```
+
+---
+
+## 🔍 Hướng dẫn luồng truy xuất nguồn gốc bằng QR Code
+
+### 1. Sinh tem QR (Phía doanh nghiệp)
+
+* Sau khi tạo sản phẩm thành công trên Dashboard, hệ thống sẽ tự động sinh mã QR chứa đường dẫn định danh của sản phẩm (ví dụ: `/verify/1`).
+* Doanh nghiệp có thể tải xuống hoặc lưu mã QR để in và dán lên bao bì sản phẩm.
+
+### 2. Quét mã QR bằng camera (Phía người dùng)
+
+* Truy cập đường dẫn:
+
+```text
+http://localhost:5173/scanner
+```
+
+* Trình duyệt sẽ yêu cầu quyền truy cập camera.
+* Đưa mã QR của sản phẩm vào khung hình để hệ thống tự động nhận diện và giải mã.
+
+### 3. Kiểm tra và đối chiếu dữ liệu Blockchain
+
+* Sau khi quét thành công, hệ thống sẽ tự động chuyển hướng đến trang xác thực sản phẩm (`/verify/:id`).
+
+* Frontend gửi yêu cầu đến Rust Backend để thực hiện đối chiếu ba lớp dữ liệu:
+
+  * Database Hash
+  * Recomputed Hash
+  * Blockchain Hash
+
+* Kết quả xác thực được hiển thị như sau:
+
+  * ✅ **SẢN PHẨM CHÍNH HÃNG**: Khi cả ba giá trị hash trùng khớp, chứng minh dữ liệu chưa bị thay đổi.
+  * ❌ **CẢNH BÁO GIAN LẬN**: Khi phát hiện sai lệch giữa các giá trị hash, cho thấy dữ liệu có dấu hiệu bị chỉnh sửa hoặc can thiệp trái phép.
