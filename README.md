@@ -162,6 +162,7 @@ npm run dev
 
 Truy cập trình duyệt tại: http://localhost:5173
 
+```
 🔍 Hướng dẫn luồng Truy xuất nguồn gốc (QR Code Scanner)
 1. Sinh tem QR (Phía Doanh nghiệp): - Sau khi tạo sản phẩm thành công trên Dashboard, hệ thống tự động sinh ra một mã QR chứa đường dẫn định danh của sản phẩm (VD: /verify/1).
   - Doanh nghiệp có thể lưu mã QR này để dán lên bao bì sản phẩm.
