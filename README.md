@@ -140,3 +140,38 @@ Backend dùng `ethers-rs` để gọi 3 hàm:
 - `createProduct()` → lưu hash khi tạo sản phẩm
 - `getProduct()` → lấy thông tin
 - `verifyProduct()` → xác thực hash
+
+---
+
+## 💻 Giao diện Frontend & Hệ thống Quét QR (ReactJS / Vite)
+
+Phần này bao gồm Web Dashboard dành cho doanh nghiệp và Hệ thống Web Scanner dành cho người dùng cuối để truy xuất nguồn gốc.
+
+### Cài đặt và Khởi chạy
+Mở một Terminal mới và chạy các lệnh sau:
+
+```bash
+# Di chuyển vào thư mục frontend
+cd frontend
+
+# Cài đặt thư viện (bao gồm html5-qrcode, qrcode.react, react-router-dom, axios)
+npm install
+
+# Khởi động server giao diện
+npm run dev
+
+Truy cập trình duyệt tại: http://localhost:5173
+
+🔍 Hướng dẫn luồng Truy xuất nguồn gốc (QR Code Scanner)
+1. Sinh tem QR (Phía Doanh nghiệp): - Sau khi tạo sản phẩm thành công trên Dashboard, hệ thống tự động sinh ra một mã QR chứa đường dẫn định danh của sản phẩm (VD: /verify/1).
+  - Doanh nghiệp có thể lưu mã QR này để dán lên bao bì sản phẩm.
+
+2. Sử dụng Camera quét mã (Phía Người dùng):
+  - Truy cập vào đường dẫn http://localhost:5173/scanner.
+  - Trình duyệt sẽ yêu cầu quyền sử dụng Camera.
+  - Đưa tem QR sản phẩm vào khung hình để hệ thống tự động nhận diện.
+
+3. Kiểm tra và Đối chiếu Blockchain:
+  - Ngay khi đọc được mã, hệ thống chuyển hướng sang trang Xác thực (/verify/:id).
+  - Frontend sẽ gọi API xuống Rust Backend để đối chiếu 3 lớp dữ liệu: Database Hash, Recomputed Hash, và Blockchain Hash.
+  - Kết quả trả về: Hiển thị mác ✅ SẢN PHẨM CHÍNH HÃNG (Nếu toàn vẹn) hoặc ❌ CẢNH BÁO GIAN LẬN (Nếu dữ liệu Database đã bị can thiệp trái phép).
