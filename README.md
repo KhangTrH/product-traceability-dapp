@@ -143,7 +143,7 @@ Backend dùng `ethers-rs` để gọi 3 hàm:
 
 ---
 
-## 💻 Giao diện Frontend & Hệ thống Quét QR (ReactJS / Vite)
+## Giao diện Frontend & Hệ thống Quét QR (ReactJS / Vite)
 
 Phần này bao gồm **Web Dashboard** dành cho doanh nghiệp và **Hệ thống Web Scanner** dành cho người dùng cuối nhằm thực hiện truy xuất nguồn gốc sản phẩm.
 
@@ -171,7 +171,7 @@ http://localhost:5173
 
 ---
 
-## 🔍 Hướng dẫn luồng truy xuất nguồn gốc bằng QR Code
+## Hướng dẫn luồng truy xuất nguồn gốc bằng QR Code
 
 ### 1. Sinh tem QR (Phía doanh nghiệp)
 
@@ -201,5 +201,5 @@ http://localhost:5173/scanner
 
 * Kết quả xác thực được hiển thị như sau:
 
-  * ✅ **SẢN PHẨM CHÍNH HÃNG**: Khi cả ba giá trị hash trùng khớp, chứng minh dữ liệu chưa bị thay đổi.
-  * ❌ **CẢNH BÁO GIAN LẬN**: Khi phát hiện sai lệch giữa các giá trị hash, cho thấy dữ liệu có dấu hiệu bị chỉnh sửa hoặc can thiệp trái phép.
+  * **SẢN PHẨM CHÍNH HÃNG**: Khi cả ba giá trị hash trùng khớp, chứng minh dữ liệu chưa bị thay đổi.
+  * **CẢNH BÁO GIAN LẬN**: Khi phát hiện sai lệch giữa các giá trị hash, cho thấy dữ liệu có dấu hiệu bị chỉnh sửa hoặc can thiệp trái phép.
