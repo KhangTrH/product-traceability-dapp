@@ -57,11 +57,6 @@ const Verify = () => {
           <span style={{ color: '#555', fontFamily: 'monospace' }}>{product?.db_hash || "Không có dữ liệu"}</span>
         </p>
         
-        <p style={{ wordWrap: 'break-word', fontSize: '14px', background: '#e3f2fd', padding: '10px', borderRadius: '6px' }}>
-          <strong>Hash tính toán lại từ dữ liệu (Recomputed):</strong> <br/>
-          <span style={{ color: '#0d47a1', fontFamily: 'monospace' }}>{product?.recomputed_hash || "Không có dữ liệu"}</span>
-        </p>
-
         <p style={{ wordWrap: 'break-word', fontSize: '14px', background: isValid ? '#e8f5e9' : '#ffebee', padding: '10px', borderRadius: '6px' }}>
           <strong>Hash gốc trên Blockchain:</strong> <br/>
           <span style={{ color: isValid ? '#2e7d32' : '#c62828', fontFamily: 'monospace', fontWeight: 'bold' }}>
