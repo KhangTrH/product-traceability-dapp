@@ -16,7 +16,7 @@ const Scanner = () => {
     // Xử lý khi quét thành công
     scanner.render(
       (decodedText) => {
-        // Cắt lấy ID ở cuối chuỗi (Phòng trường hợp QR chứa nguyên 1 cái đường link)
+        // Cắt lấy ID ở cuối chuỗi
         const parts = decodedText.split('/');
         const id = parts[parts.length - 1];
 
@@ -25,7 +25,7 @@ const Scanner = () => {
         navigate(`/verify/${id}`);
       },
       (error) => {
-        // Bỏ qua các lỗi ko tìm thấy QR lặt vặt
+        // Bỏ qua các lỗi quét tạm thời phát sinh trong quá trình nhận diện mã QR 
       }
     );
 
@@ -45,3 +45,4 @@ const Scanner = () => {
 };
 
 export default Scanner;
+
