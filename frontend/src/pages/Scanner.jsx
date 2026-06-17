@@ -37,7 +37,7 @@ const Scanner = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'sans-serif' }}>
-      <h2>📷 Quét Mã QR Sản Phẩm</h2>
+      <h2>Quét Mã QR Sản Phẩm</h2>
       <p style={{ color: '#666' }}>Đưa mã QR vào khung hình để kiểm tra nguồn gốc</p>
       <div id="reader" style={{ width: '100%', maxWidth: '500px', margin: '20px auto' }}></div>
     </div>
