@@ -57,7 +57,6 @@ const Verify = () => {
           <span style={{ color: '#555', fontFamily: 'monospace' }}>{product?.db_hash || "Không có dữ liệu"}</span>
         </p>
 
-        {/* ĐÂY LÀ PHẦN HIỂN THỊ RECOMPUTED HASH MỚI THÊM VÀO */}
         <p style={{ wordWrap: 'break-word', fontSize: '14px', background: '#e3f2fd', padding: '10px', borderRadius: '6px' }}>
           <strong>Hash tính toán lại (Recomputed Hash):</strong> <br/>
           <span style={{ color: '#0d47a1', fontFamily: 'monospace' }}>{product?.recomputed_hash || "Không có dữ liệu"}</span>
