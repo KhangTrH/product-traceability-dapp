@@ -7,3 +7,5 @@ coverage/
 coverage.json
 typechain-types/
 .DS_Store
+backups/
+rustup-init.exe

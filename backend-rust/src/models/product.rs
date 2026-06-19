@@ -55,6 +55,8 @@ pub struct CreateProductResponse {
 pub struct VerifyProductResponse {
     pub product_id: i64,
     pub name: String,
+    pub manufacturer: String,
+    pub description: String,
     pub db_hash: String,
     pub recomputed_hash: String,
     pub blockchain_hash: String,
