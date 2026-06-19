@@ -627,15 +627,15 @@ const Dashboard = () => {
             </div>
             <div className="form-group">
               <label className="form-label">Tên sản phẩm <span style={{ color: 'var(--red)' }}>*</span></label>
-              <input type="text" className="input-control" placeholder="Ví dụ: Gạo ST25 Sóc Trăng" value={name} onChange={(e) => setName(e.target.value)} required disabled={submitting} />
+              <input type="text" className="input-control" placeholder="Ví dụ: Tinh chất Bí Đao Cocoon" value={name} onChange={(e) => setName(e.target.value)} required disabled={submitting} />
             </div>
             <div className="form-group">
               <label className="form-label">Nhà sản xuất <span style={{ color: 'var(--red)' }}>*</span></label>
-              <input type="text" className="input-control" placeholder="Ví dụ: DNTN Hồ Quang Trí" value={manufacturer} onChange={(e) => setManufacturer(e.target.value)} required disabled={submitting} />
+              <input type="text" className="input-control" placeholder="Ví dụ: Mỹ phẩm Cocoon Việt Nam" value={manufacturer} onChange={(e) => setManufacturer(e.target.value)} required disabled={submitting} />
             </div>
             <div className="form-group" style={{ marginBottom: '28px' }}>
               <label className="form-label">Mô tả sản phẩm</label>
-              <textarea className="input-control" placeholder="Mô tả đặc điểm sản phẩm, nguồn gốc..." value={description} onChange={(e) => setDescription(e.target.value)} rows="4" style={{ resize: 'vertical', fontFamily: 'inherit' }} disabled={submitting} />
+              <textarea className="input-control" placeholder="Ví dụ: Serum dưỡng da mụn, kiềm dầu, chiết xuất bí đao, rau má và tràm trà tự nhiên..." value={description} onChange={(e) => setDescription(e.target.value)} rows="4" style={{ resize: 'vertical', fontFamily: 'inherit' }} disabled={submitting} />
             </div>
             <button type="submit" className="btn btn-primary w-full" disabled={submitting} style={{ height: '44px', justifyContent: 'center' }}>
               {submitting ? (
