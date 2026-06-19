@@ -216,7 +216,10 @@ Khi làm việc trên Localhost, do **Hardhat Node chạy trên bộ nhớ tạm
 3. **Đăng ký sản phẩm mới**: Hãy đăng ký sản phẩm mới trên Dashboard để sinh dữ liệu khớp với Blockchain hiện hành. Hoặc bạn có thể xóa các dòng cũ trong bảng `products` của PostgreSQL để làm sạch môi trường.
 
 ### 2. Các tệp tin Frontend được nâng cấp
-*   [Verify.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/pages/Verify.jsx): Tích hợp logic 3 trạng thái và **Hộp chẩn đoán Sandbox** giải thích bản chất bất biến của Blockchain khi gặp lỗi lệch pha dữ liệu.
-*   [Dashboard.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/pages/Dashboard.jsx): Tích hợp gọi `/api/verify` trong Drawer chi tiết sản phẩm để hiển thị **Trạng thái Blockchain** thời gian thực, đồng thời áp dụng **Lưới 3 cột hợp nhất (Unified Grid)** để căn thẳng hàng tuyệt đối.
-*   [QRCodeDisplay.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/components/QRCodeDisplay.jsx): Sử dụng thuộc tính `level="H"` cho QRCodeCanvas giúp tăng khả năng chống mờ/xước mã vạch lên đến 30%.
-*   [Footer.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/components/Footer.jsx): Cập nhật tên môn học thành **Blockchain**.
+*   [Verify.jsx]: Tích hợp logic 3 trạng thái và **Hộp chẩn đoán Sandbox** giải thích bản chất bất biến của Blockchain khi gặp lỗi lệch pha dữ liệu.
+*   [Dashboard.jsx]: Tích hợp gọi `/api/verify` trong Drawer chi tiết sản phẩm để hiển thị **Trạng thái Blockchain** thời gian thực, đồng thời áp dụng **Lưới 3 cột hợp nhất (Unified Grid)** để căn thẳng hàng tuyệt đối.
+*   [QRCodeDisplay.jsx]: Sử dụng thuộc tính `level="H"` cho QRCodeCanvas giúp tăng khả năng chống mờ/xước mã vạch lên đến 30%.
+*   [Footer.jsx]: Cập nhật tên môn học thành **Blockchain**.
+
+
+Video demo: https://drive.google.com/file/d/1k-zW3z32JBBBxQtp6ry4nIa77gyyKTpv/view?usp=sharing
