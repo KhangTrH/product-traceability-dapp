@@ -199,7 +199,24 @@ http://localhost:5173/scanner
   * Recomputed Hash
   * Blockchain Hash
 
-* Kết quả xác thực được hiển thị như sau:
+* Kết quả xác thực được hiển thị trực quan thông qua **3 trạng thái**:
 
-  * **SẢN PHẨM CHÍNH HÃNG**: Khi cả ba giá trị hash trùng khớp, chứng minh dữ liệu chưa bị thay đổi.
-  * **CẢNH BÁO GIAN LẬN**: Khi phát hiện sai lệch giữa các giá trị hash, cho thấy dữ liệu có dấu hiệu bị chỉnh sửa hoặc can thiệp trái phép.
+  * **SẢN PHẨM CHÍNH HÃNG (VERIFIED)**: Khi cả ba giá trị hash trùng khớp hoàn toàn, chứng minh sản phẩm là thật và cơ sở dữ liệu chưa bị thay đổi. (Giao diện xanh lá)
+  * **ĐANG CHỜ ĐỒNG BỘ CHUỖI (PENDING SYNC)**: Khi CSDL cục bộ vẫn an toàn và toàn vẹn, nhưng Blockchain không có bản ghi sản phẩm (thường xảy ra khi Hardhat node local bị restart về block 0). Hệ thống hiển thị màu cam kèm hộp chẩn đoán Sandbox thay vì báo lỗi giả mạo để tránh hiểu lầm.
+  * **CẢNH BÁO GIAN LẬN (TAMPERED)**: Khi phát hiện sai lệch giữa giá trị băm trong CSDL và sổ cái Blockchain, cho thấy dữ liệu CSDL đã bị chỉnh sửa hoặc can thiệp trái phép. (Giao diện màu đỏ)
+
+---
+
+## 💡 Hướng dẫn dành cho Team Phát triển (Development & Integration Guide)
+
+### 1. Cách vận hành & đồng bộ hóa môi trường Sandbox
+Khi làm việc trên Localhost, do **Hardhat Node chạy trên bộ nhớ tạm (RAM)** nên mỗi khi tắt/khởi động lại máy tính, blockchain sẽ quay về block 0 (Genesis block) trong khi database PostgreSQL vẫn lưu dữ liệu cũ. Để đồng bộ lại:
+1. **Khởi động Blockchain Node**: `npm run node`
+2. **Deploy lại Smart Contract**: `npm run deploy:local` (Nhớ cập nhật địa chỉ Contract mới từ `deployments/deployment-info.json` vào `.env` của Rust Backend và restart backend).
+3. **Đăng ký sản phẩm mới**: Hãy đăng ký sản phẩm mới trên Dashboard để sinh dữ liệu khớp với Blockchain hiện hành. Hoặc bạn có thể xóa các dòng cũ trong bảng `products` của PostgreSQL để làm sạch môi trường.
+
+### 2. Các tệp tin Frontend được nâng cấp
+*   [Verify.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/pages/Verify.jsx): Tích hợp logic 3 trạng thái và **Hộp chẩn đoán Sandbox** giải thích bản chất bất biến của Blockchain khi gặp lỗi lệch pha dữ liệu.
+*   [Dashboard.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/pages/Dashboard.jsx): Tích hợp gọi `/api/verify` trong Drawer chi tiết sản phẩm để hiển thị **Trạng thái Blockchain** thời gian thực, đồng thời áp dụng **Lưới 3 cột hợp nhất (Unified Grid)** để căn thẳng hàng tuyệt đối.
+*   [QRCodeDisplay.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/components/QRCodeDisplay.jsx): Sử dụng thuộc tính `level="H"` cho QRCodeCanvas giúp tăng khả năng chống mờ/xước mã vạch lên đến 30%.
+*   [Footer.jsx](file:///e:/05.%20UEH/An%20toan%20ung%20dung%20web/Cuoi%20ki/product-traceability-dapp/frontend/src/components/Footer.jsx): Cập nhật tên môn học thành **Blockchain**.

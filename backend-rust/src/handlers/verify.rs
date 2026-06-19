@@ -58,6 +58,8 @@ pub async fn verify_product(
         return Ok(Json(VerifyProductResponse {
             product_id: row.product_id,
             name: row.name,
+            manufacturer: row.manufacturer,
+            description: row.description,
             db_hash: row.product_hash,
             recomputed_hash,
             blockchain_hash: String::new(),
@@ -83,6 +85,8 @@ pub async fn verify_product(
     Ok(Json(VerifyProductResponse {
         product_id: row.product_id,
         name: row.name,
+        manufacturer: row.manufacturer,
+        description: row.description,
         db_hash: row.product_hash,
         recomputed_hash,
         blockchain_hash: blockchain_hash_hex,
