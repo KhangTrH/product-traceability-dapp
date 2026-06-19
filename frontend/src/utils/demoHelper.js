@@ -18,10 +18,10 @@ const INITIAL_MOCK_PRODUCTS = [
   {
     id: 1,
     product_id: 1001,
-    name: "Cà phê Robusta Đắk Lắk",
-    manufacturer: "Hợp tác xã Cà phê Ban Mê",
-    description: "Hạt cà phê chín đỏ được thu hái thủ công, lên men tự nhiên và rang mộc nguyên bản.",
-    product_hash: "44c38a775d95289776d079e5bccc0577265a15b67ae875aa8dedd364fe10d468", // real hash
+    name: "Nước tẩy trang Hoa Hồng Cocoon",
+    manufacturer: "Mỹ phẩm Cocoon Việt Nam",
+    description: "Nước tẩy trang hoa hồng làm sạch sâu, dịu nhẹ và cấp ẩm tức thì cho da nhạy cảm.",
+    product_hash: "44c38a775d95289776d079e5bccc0577265a15b67ae875aa8dedd364fe10d468", // placeholder to overwrite
     tx_hash: "0x39ba678ac90efb41c098df4e9a8f27cf8c222ff804e784d7bf4f2ff8089abcd44",
     creator_address: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
     created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
@@ -30,10 +30,10 @@ const INITIAL_MOCK_PRODUCTS = [
   {
     id: 2,
     product_id: 1002,
-    name: "Mật ong rừng U Minh Hạ",
-    manufacturer: "Công ty Mật Ong Cà Mau",
-    description: "Mật ong rừng ngập mặn tự nhiên nguyên chất 100% thu hoạch thủ công vào mùa hoa tràm.",
-    product_hash: "875176d979193241b63c1969518bc0f254030f259f00f7a3bbdb70a4188392e0", // real hash
+    name: "Tinh chất Bí Đao trị mụn Cocoon",
+    manufacturer: "Mỹ phẩm Cocoon Việt Nam",
+    description: "Serum dưỡng da giảm dầu mụn, thông thoáng lỗ chân lông chiết xuất bí đao và tràm trà hữu cơ.",
+    product_hash: "875176d979193241b63c1969518bc0f254030f259f00f7a3bbdb70a4188392e0", // placeholder to overwrite
     tx_hash: "0x892a678ac90efb41c098df4e9a8f27cf8c222ff804e784d7bf4f2ff8089abc123",
     creator_address: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
     created_at: new Date(Date.now() - 3600000 * 5).toISOString(),
@@ -42,10 +42,10 @@ const INITIAL_MOCK_PRODUCTS = [
   {
     id: 3,
     product_id: 1003,
-    name: "Gạo ST25 Sóc Trăng",
-    manufacturer: "Doanh nghiệp Tư nhân Hồ Quang Trí",
-    description: "Gạo ngon nhất thế giới, hạt gạo dài, trắng trong, cơm dẻo mềm, thơm hương lá dứa tự nhiên.",
-    product_hash: "b23f7b6f5efa582f6134d0d764d76796ccc60d39373e09f802f7a884564783ec", // real hash
+    name: "Gel rửa mặt nghệ Thorakao",
+    manufacturer: "Công ty Mỹ phẩm Thorakao Việt Nam",
+    description: "Gel rửa mặt làm sáng da, mờ vết thâm, kháng khuẩn chiết xuất nghệ tươi và tràm trà tự nhiên.",
+    product_hash: "b23f7b6f5efa582f6134d0d764d76796ccc60d39373e09f802f7a884564783ec", // placeholder to overwrite
     tx_hash: "0x442a678ac90efb41c098df4e9a8f27cf8c222ff804e784d7bf4f2ff8089abc888",
     creator_address: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
     created_at: new Date(Date.now() - 3600000).toISOString(),
@@ -55,15 +55,29 @@ const INITIAL_MOCK_PRODUCTS = [
 
 export async function initializeMockData() {
   const stored = localStorage.getItem('mock_products');
-  if (!stored) {
-    // Generate real sha256 hashes for initial mock products so that they verify correctly by default!
+  let needsReset = false;
+  
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      // Reset nếu phát hiện dữ liệu cũ là cà phê, mật ong, gạo
+      if (parsed.some(p => p.name.includes("Cà phê") || p.name.includes("ST25") || p.name.includes("Mật ong"))) {
+        needsReset = true;
+      }
+    } catch (e) {
+      needsReset = true;
+    }
+  }
+
+  if (!stored || needsReset) {
+    // Tạo mã hash sha256 thực tế cho dữ liệu mock để xác thực khớp ban đầu!
     for (let p of INITIAL_MOCK_PRODUCTS) {
       const payload = getCanonicalPayload(p.product_id, p.name, p.manufacturer, p.description);
       p.product_hash = await calculateSha256(payload);
     }
     localStorage.setItem('mock_products', JSON.stringify(INITIAL_MOCK_PRODUCTS));
   } else {
-    // Auto-migrate: check if the stored products contain legacy dummy hashes and correct them
+    // Tự động kiểm tra và sửa lại mã băm nếu có lỗi
     let products = JSON.parse(stored);
     let updated = false;
 
